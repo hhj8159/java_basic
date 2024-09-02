@@ -74,9 +74,9 @@ public class OpEx7 {
 		// 몇 개의 상자가 필요합니까?
 		System.out.println("");
 		
-		int apple = 123;
-		int box = 10;
-		System.out.println(apple / box + 1);
+//		int apple = 123;
+//		int box = 10;
+//		System.out.println(apple / box + 1);
 		
 		int apple1 = 123;
 		int box1 = 10;
@@ -97,6 +97,9 @@ public class OpEx7 {
 		System.out.println((int)(pi * 1000 + 0.5) / 1000d); 
 		
 		long num1 = 1_000_000L * 1_000_000 / 1_000_000;
+		
+		
+	
 	
 				
 		
