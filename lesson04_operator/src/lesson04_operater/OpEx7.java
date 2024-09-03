@@ -86,7 +86,7 @@ public class OpEx7 {
 		// box로 나눴을 때 나누어 떨어지면 그대로 /, / + 1해야한다.		
 //		int result = apple % box == 0 ? apple / box : apple / box + 1;
 		
-		int result = (apple + 9) / box;
+		int result = (apple1 + 9) / box1;
 		System.out.println(result);
 		
 		// 소수점 자르기 (반올림) 소수점 셋째 자리로
