@@ -44,8 +44,13 @@ public class Exer240903 {
 		// ex) 3, 10 : 3+4+5+6+7+8+9+10 // 10, 3 : 3+4+5+6+7+8+9+10
 		
 		int sum1 = 0;
-		int a = 0 , b = 0;
-		sum1 = a + b;
+		int a = 3 , b = 10;
+		for(int i = 1 ; i <= 10 ; i++) {
+			if(a >= i && b <= i) {
+				sum1 += i; 
+			}
+		}		
+		
 		System.out.println(sum1);
 		
 		
