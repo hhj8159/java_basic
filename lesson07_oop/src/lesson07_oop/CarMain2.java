@@ -4,8 +4,9 @@ public class CarMain2 {
 	public static void main(String[] args) {
 		
 		// Car 타입의 배열객체 생성
+//참조자료형 null  공간확보		
 		Car[] cars = new Car[3];
-		
+//			지역변수	
 		// car 객체 생성
 		Car tico = new Car();
 		tico.color = "화이트";
