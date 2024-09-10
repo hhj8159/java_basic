@@ -1,8 +1,7 @@
 package student;
 
-
-// 학생 예제 > java beans 명세서에 맞게끔 수정
-// field는 private, method는 public
+//학생 예제 > java beans 명세서에 맞게끔 수정
+//field는 private, method는 public
 public class Student {
 	private int no;
 	private String name;
@@ -17,10 +16,10 @@ public class Student {
 	public Student(int no, String name, int kor, int eng, int mat) {
 		super();
 		this.no = no;
-		this.name = name;
-		this.kor = kor;
-		this.eng = eng;
-		this.mat = mat;
+		this.setName(name);
+		this.setKor(kor);
+		this.setEng(eng);
+		this.setMat(mat);
 	}
 	
 	// no getter
@@ -34,17 +33,51 @@ public class Student {
 	}
 	
 	public String toString() {
-		return String.format("%3d %4s %5d %5d %5d %5d %6.2f\n", no, name, kor, eng, mat, total(), avg());
+		return String.format("%3d %4s %5d %5d %5d %5d %6.2f\n", no, getName(), getKor(), getEng(), getMat(), total(), avg());
 
 	}
 	
 	int total() {
-		return kor + eng + +mat;
+		return getKor() + getEng() + +getMat();
 	}
 	
 	double avg() {
 		return total() / 3d;
 	}
+
+	public int getMat() {
+		return mat;
+	}
+
+	public void setMat(int mat) {
+		this.mat = mat;
+	}
+
+	public int getEng() {
+		return eng;
+	}
+
+	public void setEng(int eng) {
+		this.eng = eng;
+	}
+
+	public int getKor() {
+		return kor;
+	}
+
+	public void setKor(int kor) {
+		this.kor = kor;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+
 	
 	
 }

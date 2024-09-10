@@ -17,8 +17,7 @@ public class StudentMain {
 		// 업데이트
 		// 삭제 (학번으로 삭제)
 		// Car 배열
-		
-		Scanner scanner = new Scanner(System.in);
+
 		StudentService ss = new StudentService();	
 		
 		while(true) {
@@ -28,30 +27,6 @@ public class StudentMain {
 			int input = StudentUtils.nextInt("1. 조회 2. 등록 3. 수정 4. 삭제 5. 종료");
 			switch (input) {
 			case 1:
-				//ss.list();
-				int input2 = StudentUtils.nextInt("1. 학번 정렬 2. 이름 정렬 3. 석차 정렬");
-				switch (input) {
-					case 1:
-//						int arr[] = {};
-//						for(int i = 0; i < arr.length; i++) {
-//							for(int j = 0; j < arr.length - 1 - i; j++) {
-//								if(arr[i] < arr[j+1]) {
-//									int tmp = arr[j];
-//									arr[j] = arr[j+1];
-//									arr[j+1] = tmp;
-//								}
-//						}
-						ss.list();
-						
-						break;
-					case 2:
-						ss.list();
-						break;
-					case 3:
-						ss.list();
-						break;
-					}
-				
 				break;
 			case 2:
 				ss.add();

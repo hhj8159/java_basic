@@ -1,0 +1,19 @@
+package lesson09_interface;
+
+@UserAnno(value = "hey")
+public class UserClass {
+	@UserAnno("hi")
+	void m() {
+		
+	}
+	
+	@UserAnno(value = "world", number = 10)
+	@SuppressWarnings("unused")
+	void m2() {
+		
+	}
+	
+	@UserAnno(value = {"hey", "hi", "world"}, number = 5)
+	int i;
+	
+}

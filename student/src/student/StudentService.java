@@ -1,12 +1,13 @@
 package student;
+
 import static student.StudentUtils.*;
 
 import java.util.Arrays;
 
 //Logic
 public class StudentService {
-	Student[] students = new Student[5];
-	int cnt;
+	private Student[] students = new Student[5];
+	private int cnt;
 	
 	{
 		students[cnt++] = new Student(1, "새똥이", 80, 90, 100);
@@ -15,7 +16,7 @@ public class StudentService {
 	}
 	
 	// 학생 등록 레지스트
-	void add() {
+	public void add() {
 		//풀이
 		int no = nextInt("학번");
 		String name = nextLine("이름");
@@ -37,7 +38,7 @@ public class StudentService {
 		
 	}
 	// 학생 목록 조회
-	void list()	{
+	public void list()	{
 //		System.out.println("list()");		
 //		int no = StudentUtils.nextInt("1. 학번 정렬 2. 이름 정렬 3. 석차 정렬");
 		
@@ -60,7 +61,7 @@ public class StudentService {
 		
 	}
 	// 학생 이름, 점수 수정
-	void modify() {
+	public void modify() {
 		// 1. 학번 입력
 		// 2. 학번을 통한 탐색(배열) >> 학생
 		// 3. 이름, 국어, 영어, 수학 점수 변경
@@ -72,15 +73,15 @@ public class StudentService {
 			System.out.println("해당 학번은 존재하지 않습니다");
 			return;			
 		}
-		s.name = nextLine("이름");
-		s.kor = nextInt("국어");
-		s.eng = nextInt("영어");
-		s.mat = nextInt("수학");
+		s.setName(nextLine("이름"));
+		s.setKor(nextInt("국어"));
+		s.setEng(nextInt("영어"));
+		s.setMat(nextInt("수학"));
 
 //		System.out.println("modify()");
 //		System.out.println("학생 정보 수정");
 //		int no = StudentUtils.nextInt("해당 학생의 학번");
-		//		String name = nextLine("이름");
+//		String name = nextLine("이름");
 //		int kor = nextInt("국어");
 //		int eng = nextInt("영어");
 //		int mat = nextInt("수학");
@@ -91,7 +92,7 @@ public class StudentService {
 	}
 	
 	//학생 삭제
-	void remove() {
+	public void remove() {
 		// 1. 학번 입력
 		// 2. 학번을 통한 탐색(배열) >> 학생
 		Student s = findByNo();
@@ -112,11 +113,11 @@ public class StudentService {
 //		System.out.println("학생 정보 삭제");
 	}
 		
-	Student findByNo() {
+	private Student findByNo() {
 		Student student = null;
 		int no = nextInt("학번");
 		for(int i = 0; i < cnt; i++) {
-			if(students[i].no == no) {
+			if(students[i].getNo() == no) {
 				student = students[i];
 			}
 		}

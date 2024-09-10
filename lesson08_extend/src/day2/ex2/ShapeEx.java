@@ -9,7 +9,6 @@ abstract class Shape{
 	abstract double length();
 }
 
-
 class Circle extends Shape{
 	int r;
 	Circle(int r) {
