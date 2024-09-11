@@ -27,6 +27,7 @@ public class StudentMain {
 			int input = StudentUtils.nextInt("1. 조회 2. 등록 3. 수정 4. 삭제 5. 종료");
 			switch (input) {
 			case 1:
+				ss.list();
 				break;
 			case 2:
 				ss.add();

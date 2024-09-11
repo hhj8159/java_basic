@@ -1,17 +1,27 @@
 package student;
 
-//학생 예제 > java beans 명세서에 맞게끔 수정
-//field는 private, method는 public
-public class Student {
+// 학생 예제 > java beans 명세서에 맞게끔 수정
+// field는 private, method는 public
+// 240911 과제 예외처리 하기
+// 이름은 반드시 한글 완성형, 이름 입력 하지 않는 것도 불가, 최소 2 최대 4글자의 한글
+// 과목 점수 범위 0~100
+// 학번 중복 안됨
+
+// 학번 오름차순 이름 오름차순 점수 내림차순
+
+
+
+public class Student implements Cloneable{
 	private int no;
 	private String name;
 	private int kor;
 	private int eng;
 	private int mat;
+	private int[] arr;
 	
-	public Student() {
-		
-	}
+//	public Student() {
+//		
+//	}
 	
 	public Student(int no, String name, int kor, int eng, int mat) {
 		super();
@@ -20,6 +30,18 @@ public class Student {
 		this.setKor(kor);
 		this.setEng(eng);
 		this.setMat(mat);
+	}
+	
+	public Student(Student s) {
+		no = s.no;
+		name = s.name;
+		kor = s.kor;
+		eng = s.eng;
+		mat = s.mat;
+		if(s.arr != null)
+		arr = s.arr.clone(); // 깊은 복사
+//		arr = s.arr; 얕은 복사
+//		setNo(s.getNo()); clone   get set 할 필요가 없다.
 	}
 	
 	// no getter
@@ -76,8 +98,46 @@ public class Student {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
 
 	
+	// 클론 연습용
 	
+	@Override
+	public Student clone(){
+		Student obj = null;		
+		try {
+			obj = (Student)super.clone();
+			if(arr != null)
+				obj.arr = arr.clone(); // <- Deep Copy
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return obj;
+	}
+
+	// 이퀄스 연습용
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == null || !(obj instanceof Student)) return false;
+		Student s = (Student)obj;
+		return no == s.no && name.equals(s.name);		
+	}
+	
+	
+	
+	public class RangeException extends RuntimeException{
+		int start;
+		int end;
+		
+		public RangeException(int start, int end) {
+			this(start, end, start + "이상" + end + "이하의 값을 입력하세요");
+		}
+		public RangeException(int start, int end, String msg) {
+			super(msg);
+			this.start = start;
+			this.end = end;
+		}
+	}	
 }
