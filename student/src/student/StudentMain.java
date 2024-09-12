@@ -21,22 +21,24 @@ public class StudentMain {
 		StudentService ss = new StudentService();	
 		
 		while(true) {
-//			System.out.println("1. 조회 2. 등록 3. 수정 4. 삭제 5. 종료");
-//				int input = Integer.parseInt(scanner.nextLine());
-//			StudentUtils.nextInt("1. 조회 2. 등록 3. 수정 4. 삭제 5. 종료");
-			int input = StudentUtils.nextInt("1. 조회 2. 등록 3. 수정 4. 삭제 5. 종료");
+			try {
+			int input = ss.checkRange(StudentUtils.nextInt("1. 조회 2. 등록 3. 수정 4. 삭제 5. 종료"),1,5);
 			switch (input) {
 			case 1:
 				ss.list();
+				
 				break;
 			case 2:
 				ss.add();
+				ss.cloneAndSort();
 				break;
 			case 3:
 				ss.modify();
+				ss.cloneAndSort();
 				break;
 			case 4:
 				ss.remove();
+				ss.cloneAndSort();
 				break;
 			case 5:
 				System.out.println("bye");
@@ -44,7 +46,13 @@ public class StudentMain {
 			default:
 				break;
 					
-		
+			}
+			}
+			catch(NumberFormatException e) {
+				System.out.println("정확한 숫자를 입력하세요");
+			}
+			catch (RuntimeException e) {
+				System.out.println(e.getMessage());
 			}
 		}
 		
