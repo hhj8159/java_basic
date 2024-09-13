@@ -7,6 +7,7 @@ public class DateEx {
 	public static void main(String[] args) {
 		// Date 1.0
 		// Calendar 1.1
+		// 
 		
 		// 특정날짜 및 시간 + 30일
 		Date date = new Date(); //현재
@@ -19,6 +20,11 @@ public class DateEx {
 		System.out.println(new Date(target));
 		
 		System.out.println(date.getYear() + 1900);
+		
+		Date chrismas = new Date(123, 11, 25, 0, 0, 0);
+		System.out.println(chrismas);
+		
+		
 		
 	}
 }

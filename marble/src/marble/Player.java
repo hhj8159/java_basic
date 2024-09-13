@@ -1,13 +1,18 @@
 package marble;
 
+import marble.area.SaleLocal;
+
 public class Player {
 	String name;
+	int money = 2_000_000;
+	int idx;
+	SaleLocal[] own = new SaleLocal[32];
+	int ownCnt;
+	
 	
 	public Player(String name) {
 		this.name = name;
 	}
-	int money = 2_000_000;
-	int idx;
 
 
 	public String toString() {
