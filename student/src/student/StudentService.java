@@ -4,6 +4,7 @@ import static student.StudentUtils.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 // Logic
@@ -18,14 +19,13 @@ public class StudentService {
 	private List<Student> noSortedStudents;
 	private List<Student> nameSortedStudents;
 	
-//	private int cnt; 없어짐
+//	private int cnt;
 	
 	{
-		students.sort(null);
-		set.add(new Student(1, "새똥이", 80, 90, 100));
-		students[cnt++] = new Student(2, "개똥이", 77, 66, 77);
-		students[cnt++] = new Student(3, "새똥이", 80, 90, 100);
-		students[cnt++] = new Student(4, "개똥이", 77, 66, 77);
+		students.add(new Student(1, "새똥이", 80, 90, 100));
+		students.add(new Student(2, "개똥이", 77, 66, 77));
+		students.add(new Student(3, "새똥이", 80, 90, 100));
+		students.add(new Student(4, "개똥이", 77, 66, 77));
 		cloneAndSort();
 	}
 	// 학생 등록
@@ -38,16 +38,15 @@ public class StudentService {
 		int kor = checkRange(nextInt("국어"));
 		int eng = checkRange(nextInt("영어"));
 		int mat = checkRange(nextInt("수학"));
-		if(cnt == students.length) {
-			students = Arrays.copyOf(students, students.length * 2); 
-		}
-		students[cnt++] = new Student(no, name, kor, eng, mat);
+		// 
+		
+		students.add(new Student(no, name, kor, eng, mat));
 	}
 	// 학생 목록 조회
 	public void list() {
 //		System.out.println("list()");
 		int input = checkRange(nextInt("1. 입력순 2. 학번순 3. 이름순 4. 석차순"), 1, 4);
-		Student[] tmp = null;
+		List<Student> tmp = null;
 		switch (input) {
 		case 1:
 			tmp = students;
@@ -67,9 +66,9 @@ public class StudentService {
 		}
 		System.out.println("학번   이름    국어    영어    수학    총점    평균");
 		System.out.println("===================================================");
-		for(int i = 0 ; i < cnt ; i++) {
+		for(int i = 0 ; i < tmp.size() ; i++) {
 //			System.out.println(students[i]);
-			System.out.println(tmp[i]);
+			System.out.println(tmp.get(i));
 		}
 	}
 	// 학생 이름, 점수 수정
@@ -82,7 +81,26 @@ public class StudentService {
 			System.out.println("입력한 학번은 존재하지 않습니다.");
 			return;
 		}
-		s.setName(checkName(nextLine("이름")));
+		String name = next("이름", String.class, str -> str.matches("^[가-힣](2,4)"), "정확한 이름의 조건을 입력하세요"); 
+//		String name = next("이름", String.class, str -> str.matches {
+			char[] chs = name.toCharArray();
+//			String s = new String(chs);
+			boolean result = true;
+			if(chs.length < 2 || chs.length > 4) {
+				return false;
+//				throw new RuntimeException("이름은 2글자에서 4글자 사이로 입력하세요");
+			}
+			// '가', '나', '다', '라'
+			for(char c : chs) {
+				if(c < '가' || c > '힣') {
+					return false;
+//					throw new RuntimeException("한글로 구성된 이름으로 작성하세요");
+				}
+			}
+			return result;
+			return true;
+			}, "정확한 이름과 조건을 입력하세요");
+		s.setName(name);
 		s.setKor(checkRange(nextInt("국어")));
 		s.setEng(checkRange(nextInt("영어")));
 		s.setMat(checkRange(nextInt("수학")));
@@ -96,20 +114,15 @@ public class StudentService {
 			System.out.println("입력한 학번은 존재하지 않습니다.");
 			return;
 		}
-		for(int i = 0 ; i < cnt ; i++) {
-			if(students[i] == s) { // i = 1
-				System.arraycopy(students, i + 1, students, i, cnt-- - i - 1);
-				break;
-			}
-		}
+		students.remove(s);
 	}
 	
 	private Student findBy(int no) {
 		Student student = null;
 //		int no = nextInt("학번");
-		for(int i = 0 ; i < cnt ; i++) {
-			if(students[i].getNo() == no) {
-				student = students[i];
+		for(int i = 0 ; i < students.size() ; i++) {
+			if(students.get(i).getNo() == no) {
+				student = students.get(i);
 			}
 		}
 		return student;
@@ -151,43 +164,26 @@ public class StudentService {
 	
 	// 정렬
 	public void cloneAndSort() {
-		noSortedStudents = students.clone();
-		nameSortedStudents = students.clone();
-		totalSortedStudents = students.clone();
+		noSortedStudents = new ArrayList<Student>(students);
+		nameSortedStudents = new ArrayList<Student>(students);
+		totalSortedStudents = new ArrayList<Student>(students);
 		
-		sort(0, noSortedStudents);
-		sort(1, nameSortedStudents);
-		sort(2, totalSortedStudents);
-	}
-	
-	private void sort(int type, Student[] target) {
-		Student[] arr = target;
-		// 회차 반복
-		for(int i = 0 ; i < cnt - 1; i++) {
-			// 비교 반복
-			for(int j = 0 ; j < cnt - 1 - i; j++) { // 0,1,2,3
-				// 값 비교 자리 교환
-				boolean condition = false;
-				switch (type) {
-				case 0:
-					condition = arr[j].getNo() > arr[j+1].getNo();
-					break;
-				case 1:
-					condition = arr[j].getName().compareTo(arr[j+1].getName()) > 0;
-					break;
-				case 2:
-					condition = arr[j].total() < arr[j+1].total();
-					break;
-
-				default:
-					break;
-				}
-				if(condition) {
-					Student tmp = arr[j];
-					arr[j] = arr[j+1];
-					arr[j+1] = tmp;
-				}
+		noSortedStudents.sort((a, b) -> a.getNo() - b.getNo());
+		nameSortedStudents.sort(new Comparator<Student>() {
+			@Override
+			public int compare(Student o1, Student o2) {
+				// TODO Auto-generated method stub
+				return o1.getName().compareTo(o2.getName());
 			}
-		}
+		});
+		Comparator<Student> comp = new MyComp();
+		totalSortedStudents.sort(comp);
+	}
+}
+class MyComp implements Comparator<Student> {
+	@Override
+	public int compare(Student o1, Student o2) {
+		// TODO Auto-generated method stub
+		return o2.total() - o1.total();
 	}
 }
