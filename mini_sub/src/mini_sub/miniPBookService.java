@@ -20,9 +20,14 @@ public static void main(String[] args) {
 // System.out.println());
 }
 
-public void addBook() {
+public void addBook() {	
 	
 }
 // public void
+
+public void serchBook() {	
+	
+}
+
 
 }
