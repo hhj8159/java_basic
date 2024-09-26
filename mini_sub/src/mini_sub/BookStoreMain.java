@@ -7,9 +7,9 @@ public class BookStoreMain {
 //		cs.customerAdd();
 //		cs.customerRemove();
 		cs.printCustomer();
-		
+
+		BookService bookService = new BookService();
+		bookService.bookSearch();
 		
 	}
-	
-
 }
