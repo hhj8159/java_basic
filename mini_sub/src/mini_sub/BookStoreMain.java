@@ -9,7 +9,6 @@ public class BookStoreMain {
 		cs.printCustomer();
 
 		BookService bookService = new BookService();
-		bookService.bookSearch();
 		
 	}
 }
