@@ -1,15 +1,16 @@
-package mini_sub;
-
-import miniCustomer_Sub.CustomerService;
+package cart_sub;
 
 public class BookStoreMain {
 	public static void main(String[] args) {
-		CustomerService cs = new CustomerService();
+//		CustomerService cs = new CustomerService();
 //		cs.login();
-		cs.customerAdd();
+//		cs.customerAdd();
 //		cs.customerRemove();
 //		cs.printCustomer();
-	
+		
+		
+
+		
 	}
 	
 
